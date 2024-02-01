@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMedia", "SocialMedia\SocialMedia.csproj", "{BB141C7D-B11E-4D33-B990-CD2DB1CCF88E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTests", "NetworkTests\NetworkTests.csproj", "{5EAC3CBD-595B-4B92-89A6-B205D30D773C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB141C7D-B11E-4D33-B990-CD2DB1CCF88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB141C7D-B11E-4D33-B990-CD2DB1CCF88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB141C7D-B11E-4D33-B990-CD2DB1CCF88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB141C7D-B11E-4D33-B990-CD2DB1CCF88E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EAC3CBD-595B-4B92-89A6-B205D30D773C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EAC3CBD-595B-4B92-89A6-B205D30D773C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EAC3CBD-595B-4B92-89A6-B205D30D773C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EAC3CBD-595B-4B92-89A6-B205D30D773C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
