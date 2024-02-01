@@ -1,4 +1,4 @@
-﻿namespace SocialMedia.Graph
+namespace SocialMedia.Graph
 {
     public class AdjacencyMapGraph<E, V> : IGraph<E, V>
     {
@@ -70,8 +70,8 @@
         {
             var endpoints = e.getEndpoints();
             if (endpoints[0] == v) return endpoints[1];
-            if (endpoints[1] == v) return endpoints[0];
-            throw new InvalidDataException();
+            else if (endpoints[1] == v) return endpoints[0];
+            else throw new InvalidDataException();
         }
 
         public Edge<E, V> getEdge(Vertex<E, V> u, Vertex<E, V> v)
@@ -80,7 +80,6 @@
             {
                 return result;
             }
-
             return null;
         }
 
@@ -127,30 +126,26 @@
         {
             return vertexList.Count;
         }
-
+         
         public int findDistance(V a, V b)
         {
             var first = findVertex(a);
             var second = findVertex(b);
             return findVerticesDistance(first, second);
         }
-
-        public int findVerticesDistance(Vertex<E, V> a, Vertex<E, V> b)
+        public int findVerticesDistance(Vertex<E, V> a, Vertex<E,V> b)
         {
             throw new Exception();
         }
-
-        public Vertex<E, V> findVertex(V value)
+        public Vertex<E,V> findVertex(V value)
         {
-            foreach (var ver in vertexList)
+            foreach(var ver in vertexList)
             {
-                if (ver.getValue().getElement().Equals(value))
-                {
+                if (ver.getValue().getElement().Equals(value)){
                     return ver.getValue();
                 }
             }
-
-            throw new InvalidDataException();
+            throw new InvalidDataException(); 
         }
     }
 }
