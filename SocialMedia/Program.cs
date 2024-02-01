@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IStorageService, StorageService>();
 builder.Services.AddSingleton<PersianDateStringToDateMapper>();
 builder.Services.AddSingleton<IScoringAlgorithm, ScoringAlgorithm>();
+builder.Services.AddSingleton<IFindingVerticesWithDistance<int, User>, FindingVerticesWithDistance<int, User>>();
 builder.Services.AddAutoMapper(config =>
 {
     config.CreateMap<string, DateTime>().ConvertUsing<PersianDateStringToDateMapper>();
