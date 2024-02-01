@@ -3,7 +3,7 @@
     public class Edge<E, V>
     {
         private E element;
-        private List<Edge<E, V>> pos;
+        private Position<Edge<E, V>> pos;
         private Vertex<E, V>[] endpoints;
         public Edge(Vertex<E, V> u, Vertex<E, V> v, E element)
         {
@@ -12,7 +12,7 @@
         }
         public E getElement() { return this.element; }
         public Vertex<E, V>[] getEndpoints() { return this.endpoints; }
-        public void setPositions(List<Edge<E, V>> p) { this.pos = p; }
-        public List<Edge<E, V>> getPosition() { return this.pos; }
+        public void setPositions(Position<Edge<E, V>> p) { this.pos = p; }
+        public Position<Edge<E, V>> getPosition() { return this.pos; }
     }
 }
