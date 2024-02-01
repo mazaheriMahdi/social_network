@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 using SocialMedia.Abstraction;
-using SocialMedia.Exception;
+using SocialMedia.Exceptions;
 using SocialMedia.Graph;
 using SocialMedia.Models.BusinessModels;
 
