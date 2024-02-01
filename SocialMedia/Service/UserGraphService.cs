@@ -10,7 +10,6 @@ public class UserGraphService : IUserGraphService
 {
     private IStorageService _storageService;
     private IScoringAlgorithm _scoringAlgorithm;
-    private IGraph<int, User> _graph;
 
     public UserGraphService(IStorageService storageService, IScoringAlgorithm scoringAlgorithm)
     {
@@ -22,16 +21,16 @@ public class UserGraphService : IUserGraphService
     {
         var userList = _storageService.GetAllUsers();
 
-        _graph = new AdjacencyMapGraph<int, User>(false);
+        var graph = new AdjacencyMapGraph<int, User>(false);
 
         var idToVertexMap = new ConcurrentDictionary<long, Vertex<int, User>>();
 
         foreach (var user in userList)
         {
-            idToVertexMap[user.Id] = _graph.insertVertex(user);
+            idToVertexMap[user.Id] = graph.insertVertex(user);
         }
 
-        foreach (var vertex in _graph.vertices())
+        foreach (var vertex in graph.vertices())
         {
             var connectionIds = vertex.getElement().ConnectionId.ToList();
             connectionIds.ForEach(id =>
@@ -43,8 +42,10 @@ public class UserGraphService : IUserGraphService
                 }
 
                 var score = _scoringAlgorithm.Score(vertex.getElement(), targetVertex.getElement());
-                _graph.insertEdge(vertex, targetVertex, score);
+                graph.insertEdge(vertex, targetVertex, score);
             });
         }
+
+        _storageService.SaveGraph(graph);
     }
 }

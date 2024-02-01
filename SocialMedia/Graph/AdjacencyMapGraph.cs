@@ -8,8 +8,10 @@
 
         public AdjacencyMapGraph(bool direcred)
         {
+            edgeList = new List<Position<Edge<E, V>>>();
+            vertexList = new List<Position<Vertex<E, V>>>();
             isDeirected = direcred;
-        }       
+        }
 
         public void removeEdge(Edge<E, V> e)
         {
@@ -18,20 +20,22 @@
 
         public void removeVertex(Vertex<E, V> v)
         {
-            foreach(var e in outgoingEdges(v))
+            foreach (var e in outgoingEdges(v))
             {
                 removeEdge(e);
             }
-            foreach(var e in incomingEdges(v))
+
+            foreach (var e in incomingEdges(v))
             {
                 removeEdge(e);
             }
+
             vertexList.Remove(v.getPosition());
         }
 
         public Edge<E, V> insertEdge(Vertex<E, V> u, Vertex<E, V> v, E element)
         {
-            if(getEdge(u,v) == null)
+            if (getEdge(u, v) == null)
             {
                 Edge<E, V> newEdge = new Edge<E, V>(u, v, element);
                 Position<Edge<E, V>> newPos = new Position<Edge<E, V>>(newEdge);
@@ -41,15 +45,16 @@
                 v.getIncoming().Add(u, newEdge);
                 return newEdge;
             }
+
             throw new ArgumentException();
         }
 
         public Vertex<E, V> insertVertex(V element)
         {
-            Vertex<E, V> newVertex = new Vertex<E,V>(element, isDeirected);
+            Vertex<E, V> newVertex = new Vertex<E, V>(element, isDeirected);
             Position<Vertex<E, V>> pos = new Position<Vertex<E, V>>(newVertex);
-            pos.position = vertexList.Last();
             vertexList.Add(pos);
+            pos.position = vertexList.Last();
             newVertex.setPosition(vertexList.Last());
             return newVertex;
         }
@@ -71,7 +76,11 @@
 
         public Edge<E, V> getEdge(Vertex<E, V> u, Vertex<E, V> v)
         {
-            return u.getOutgoing()[v];
+            if (!u.getOutgoing().TryGetValue(v, out var result))
+            {
+                return result;
+            }
+            return null;
         }
 
         public int inDegreee(Vertex<E, V> v)

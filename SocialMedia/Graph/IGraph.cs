@@ -1,6 +1,6 @@
 ﻿namespace SocialMedia.Graph
 {
-    internal interface IGraph<E, V>
+    public interface IGraph<E, V>
     {
         int numVertices();
         List<Vertex<E, V>> vertices();

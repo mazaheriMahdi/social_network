@@ -1,5 +1,6 @@
 using AutoMapper;
 using SocialMedia.Abstraction;
+using SocialMedia.Graph;
 using SocialMedia.Models.BusinessModels;
 using SocialMedia.Models.RequestModel;
 
@@ -9,6 +10,7 @@ public class StorageService : IStorageService
 {
     private readonly IMapper _mapper;
     private readonly List<User> _users;
+    private IGraph<int, User> _graph;
 
     public StorageService(IMapper mapper)
     {
@@ -19,6 +21,11 @@ public class StorageService : IStorageService
     public void AddToStorage(AddUserRequestModel addUserRequestModel)
     {
         _users.AddRange(_mapper.Map<UserDto[], User[]>(addUserRequestModel.Users));
+    }
+
+    public void SaveGraph(IGraph<int, User> graph)
+    {
+        _graph = graph;
     }
 
     public User[] GetAllUsers()
