@@ -2,12 +2,13 @@
 {
     public class Position<T>
     {
-        T value;
-        Position<T> position;
+        private T value;
+        public Position<T> position;
         public Position(T value)
         {
             this.value = value;
         }
+        public T getValue() { return value; }
 
     }
 }

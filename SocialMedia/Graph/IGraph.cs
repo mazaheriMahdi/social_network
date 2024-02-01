@@ -15,7 +15,7 @@
         List<Edge<E, V>> incomingEdges(Vertex<E, V> v);
         public Vertex<E, V> insertVertex(V element);
         public Edge<E, V> insertEdge(Vertex<E, V> u, Vertex<E, V> v, E element);
-        public Vertex<E, V> removeVertex(Vertex<E, V> v);
-        public Edge<E, V> removeEdge(Edge<E, V> e);
+        public void removeVertex(Vertex<E, V> v);
+        public void removeEdge(Edge<E, V> e);
     }
 }
