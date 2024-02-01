@@ -1,13 +1,13 @@
 ﻿namespace SocialMedia.Graph
 {
-    public class Vertex<E, V>
+    public class Vertex<E, V> 
     {
         private V element;
         
         private Position<Vertex<E, V>> pos;
         private Dictionary<Vertex<E, V>, Edge<E, V>> outgoing;
         private Dictionary<Vertex<E, V>, Edge<E, V>> incoming;
-        public void innerVertex(V element, bool graphIsDirected)
+        public Vertex(V element, bool graphIsDirected)
         {
             this.element = element;
             outgoing = new Dictionary<Vertex<E, V>, Edge<E, V>>();
