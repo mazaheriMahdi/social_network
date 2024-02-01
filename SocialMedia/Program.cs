@@ -15,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IStorageService, StorageService>();
 builder.Services.AddSingleton<PersianDateStringToDateMapper>();
+builder.Services.AddSingleton<IScoringAlgorithm, ScoringAlgorithm>();
 builder.Services.AddAutoMapper(config =>
 {
     config.CreateMap<string, DateTime>().ConvertUsing<PersianDateStringToDateMapper>();
