@@ -27,7 +27,7 @@ public class FindingVerticesWithDistanceTest
         graph.insertEdge(vertex1, vertex3, 1);
 
         // Act
-        var actual = _sut.findVertices(graph, vertex1, 1);
+        var actual = _sut.FindVertices(graph, vertex1, 1);
 
         // Assert
         actual.Should().Contain(vertex2).And.Contain(vertex3);
@@ -46,7 +46,7 @@ public class FindingVerticesWithDistanceTest
         graph.insertEdge(vertex3, vertex1, 1);
 
         // Act
-        var actual = _sut.findVertices(graph, vertex1, 2);
+        var actual = _sut.FindVertices(graph, vertex1, 2);
 
         // Assert
         actual.Should().BeEmpty();
