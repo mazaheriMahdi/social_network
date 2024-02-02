@@ -1,7 +1,9 @@
 
+using SocialMedia.Graph.Edge;
+using SocialMedia.Graph.Vertex;
 namespace SocialMedia.Graph
 {
-    public class AdjacencyMapGraph<E, V> : AMGraph<E,V>
+    public class AdjacencyMapGraph<E, V>
     {
         bool isDeirected;
         private List<Position<Edge<E, V>>> edgeList;
@@ -85,17 +87,17 @@ namespace SocialMedia.Graph
             return null;
         }
 
-        public override int inDegreee(AMVertex<E, V> v)
+        public int inDegreee(AMVertex<E, V> v)
         {
             return v.getIncoming().Count;
         }
 
-        public override int outDegreee(AMVertex<E, V> v)
+        public int outDegreee(AMVertex<E, V> v)
         {
             return v.getOutgoing().Count;
         }
 
-        public override List<Edge<E, V>> outgoingEdges(AMVertex<E, V> v)
+        public  List<Edge<E, V>> outgoingEdges(AMVertex<E, V> v)
         {
             return new List<Edge<E, V>>(v.getOutgoing().Values);
         }
@@ -151,7 +153,7 @@ namespace SocialMedia.Graph
             throw new InvalidDataException();
         }
 
-        public override List<Edge<E, V>> incomingEdges(AMVertex<E, V> v)
+        public  List<Edge<E, V>> incomingEdges(AMVertex<E, V> v)
         {
             return new List<Edge<E, V>>(v.getIncoming().Values);
 

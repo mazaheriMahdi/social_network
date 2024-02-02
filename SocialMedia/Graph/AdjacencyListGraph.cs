@@ -1,21 +1,22 @@
 ﻿using SocialMedia.Graph.Edge;
+using SocialMedia.Graph.Vertex;
 
 namespace SocialMedia.Graph
 {
-    public class AdjacencyListGraph<E,V> : IGraph<E,>
+    public class AdjacencyListGraph<E,V>
     {
         bool isDeirected;
-        private List<Position<Edge<E, V>>> edgeList;
+        private List<Position<ALEdge<E, V>>> edgeList;
         private List<Position<ALVertex<E, V>>> vertexList;
 
         public AdjacencyListGraph(bool direcred)
         {
-            edgeList = new List<Position<Edge<E, V>>>();
+            edgeList = new List<Position<ALEdge<E, V>>>();
             vertexList = new List<Position<ALVertex<E, V>>>();
             isDeirected = direcred;
         }
 
-        public void removeEdge(Edge<E, V> e)
+        public void removeEdge(ALEdge<E, V> e)
         {
             edgeList.Remove(e.getPosition());
         }
@@ -35,12 +36,12 @@ namespace SocialMedia.Graph
             vertexList.Remove(v.getPosition());
         }
 
-        public Edge<E, V> insertEdge(ALVertex<E, V> u, ALVertex<E, V> v, E element)
+        public ALEdge<E, V> insertEdge(ALVertex<E, V> u, ALVertex<E, V> v, E element)
         {
             if (getEdge(u, v) == null)
             {
-                Edge<E, V> newEdge = new Edge<E, V>(u, v, element);
-                Position<Edge<E, V>> newPos = new Position<Edge<E, V>>(newEdge);
+                ALEdge<E, V> newEdge = new ALEdge<E, V>(u, v, element);
+                Position<ALEdge<E, V>> newPos = new Position<ALEdge<E, V>>(newEdge);
                 edgeList.Add(newPos);
                 newPos.position = edgeList.Last();
                 u.getOutgoing().Add(newEdge);
@@ -61,14 +62,14 @@ namespace SocialMedia.Graph
             return newVertex;
         }
 
-        public ALVertex<E, V>[] endVertices(Edge<E, V> e)
+        public ALVertex<E, V>[] endVertices(ALEdge<E, V> e)
         {
             ALVertex<E, V>[] arr = new ALVertex<E, V>[2];
             foreach (var end in e.getEndpoints()) arr.Append(end);
             return arr;
         }
 
-        public ALVertex<E, V> opposite(ALVertex<E, V> v, Edge<E, V> e)
+        public ALVertex<E, V> opposite(ALVertex<E, V> v, ALEdge<E, V> e)
         {
             var endpoints = e.getEndpoints();
             if (endpoints[0] == v) return endpoints[1];
@@ -76,7 +77,7 @@ namespace SocialMedia.Graph
             else throw new InvalidDataException();
         }
 
-        public ALVertex<E, V> getEdge(AMVertex<E, V> u, AMVertex<E, V> v)
+        public ALVertex<E, V> getEdge(ALVertex<E, V> u, ALVertex<E, V> v)
         {
             if (!u.getOutgoing().TryGetValue(v, out var result))
             {
@@ -96,14 +97,14 @@ namespace SocialMedia.Graph
             return v.getOutgoing().Count;
         }
 
-        public List<Edge<E, V>> outgoingEdges(ALVertex<E, V> v)
+        public List<ALEdge<E, V>> outgoingEdges(ALVertex<E, V> v)
         {
-            return new List<Edge<E, V>>(v.getOutgoing().Values);
+            return v.getOutgoing();
         }
 
-        public List<Edge<E, V>> edges()
+        public List<ALEdge<E, V>> edges()
         {
-            var tempEdgeList = new List<Edge<E, V>>();
+            var tempEdgeList = new List<ALEdge<E, V>>();
             foreach (var ed in edgeList) tempEdgeList.Add(ed.getValue());
             return tempEdgeList;
         }
@@ -120,9 +121,9 @@ namespace SocialMedia.Graph
             return this.edgeList.Count;
         }
 
-        public List<Edge<E, V>> incomingEdges(ALVertex<E, V> v)
+        public List<ALEdge<E, V>> incomingEdges(ALVertex<E, V> v)
         {
-            return new List<Edge<E, V>>(v.getIncoming().Values);
+            return v.getIncoming();
         }
 
         public int numVertices()

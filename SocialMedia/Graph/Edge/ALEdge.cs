@@ -2,16 +2,16 @@
 
 namespace SocialMedia.Graph.Edge
 {
-    public class Edge<E, V>
+    public class ALEdge<E,V>
     {
         private E element;
         private Position<Edge<E, V>> pos;
-        private AMVertex<E, V>[] endpoints;
+        private ALVertex<E, V>[] endpoints;
 
-        public Edge(AMVertex<E, V> u, AMVertex<E, V> v, E element)
+        public ALEdge(ALVertex<E, V> u, ALVertex<E, V> v, E element)
         {
             this.element = element;
-            endpoints = new AMVertex<E, V>[] { u, v };
+            endpoints = new ALVertex<E, V>[] { u, v };
         }
 
         public E getElement()
@@ -19,7 +19,7 @@ namespace SocialMedia.Graph.Edge
             return element;
         }
 
-        public AMVertex<E, V>[] getEndpoints()
+        public ALVertex<E, V>[] getEndpoints()
         {
             return endpoints;
         }

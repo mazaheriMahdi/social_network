@@ -1,9 +1,10 @@
 ﻿using System.Security.Cryptography.Xml;
 using SocialMedia.Graph.Edge;
+using SocialMedia.Graph.Vertex;
 
 namespace SocialMedia.Graph
 {
-    public class EdgeListGraph<E,V> : IGraph<E, V>
+    public class EdgeListGraph<E,V> 
     {
 
         bool isDirected;
