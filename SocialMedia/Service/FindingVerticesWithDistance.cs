@@ -4,15 +4,15 @@ namespace SocialMedia.Service;
 
 public class FindingVerticesWithDistance<E, V> : IFindingVerticesWithDistance<E, V>
 {
-    public List<Vertex<E, V>> FindVertices(AdjacencyMapGraph<E, V> graph, Vertex<E, V> v, int distance)
+    public List<AMVertex<E, V>> FindVertices(AdjacencyMapGraph<E, V> graph, AMVertex<E, V> v, int distance)
     {
-        var known = new List<Vertex<E, V>>();
-        var level = new List<Vertex<E, V>>();
+        var known = new List<AMVertex<E, V>>();
+        var level = new List<AMVertex<E, V>>();
         known.Add(v);
         level.Add(v);
         while (distance > 0)
         {
-            var nexLevel = new List<Vertex<E, V>>();
+            var nexLevel = new List<AMVertex<E, V>>();
             foreach (var ver in level)
             {
                 foreach (var edge in graph.outgoingEdges(v))

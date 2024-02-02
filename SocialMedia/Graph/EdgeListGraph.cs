@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.Xml;
+using SocialMedia.Graph.Edge;
 
 namespace SocialMedia.Graph
 {
@@ -7,22 +8,22 @@ namespace SocialMedia.Graph
 
         bool isDirected;
         private List<Position<Edge<E, V>>> edgeList;
-        private List<Position<Vertex<E, V>>> vertexList;
+        private List<Position<AMVertex<E, V>>> vertexList;
         public EdgeListGraph(bool isDirec)
         {
             isDirected = isDirec;
             edgeList = new List<Position<Edge<E, V>>>();
-            vertexList = new List<Position<Vertex<E, V>>>();
+            vertexList = new List<Position<AMVertex<E, V>>>();
         }
 
-        public Vertex<E, V>[] endVertices(Edge<E, V> e)
+        public AMVertex<E, V>[] endVertices(Edge<E, V> e)
         {
-            Vertex<E, V>[] arr = new Vertex<E, V>[2];
+            AMVertex<E, V>[] arr = new AMVertex<E, V>[2];
             foreach (var end in e.getEndpoints()) arr.Append(end);
             return arr;
         }
 
-        public Edge<E, V> getEdge(Vertex<E, V> u, Vertex<E, V> v)
+        public Edge<E, V> getEdge(AMVertex<E, V> u, AMVertex<E, V> v)
         {
 
             foreach (var edge in this.edges())
@@ -33,18 +34,18 @@ namespace SocialMedia.Graph
             throw new InvalidDataException();
         }
 
-        public List<Edge<E, V>> incomingEdges(Vertex<E, V> v)
+        public List<Edge<E, V>> incomingEdges(AMVertex<E, V> v)
         {
             List<Edge<E, V>> edges;
             return  new List<Edge<E,V>>(v.getIncoming().Values);
         }
 
-        public int inDegreee(Vertex<E, V> v)
+        public int inDegreee(AMVertex<E, V> v)
         {
             return v.getIncoming().Count;
         }
 
-        public Edge<E, V> insertEdge(Vertex<E, V> u, Vertex<E, V> v, E element)
+        public Edge<E, V> insertEdge(AMVertex<E, V> u, AMVertex<E, V> v, E element)
         {
             if (getEdge(u, v) == null)
             {
@@ -57,10 +58,10 @@ namespace SocialMedia.Graph
             throw new ArgumentException();
         }
 
-        public Vertex<E, V> insertVertex(V element)
+        public AMVertex<E, V> insertVertex(V element)
         {
-            Vertex<E, V> newVertex = new Vertex<E, V>(element, isDirected);
-            Position<Vertex<E, V>> pos = new Position<Vertex<E, V>>(newVertex);
+            AMVertex<E, V> newVertex = new AMVertex<E, V>(element, isDirected);
+            Position<AMVertex<E, V>> pos = new Position<AMVertex<E, V>>(newVertex);
             pos.position = vertexList.Last();
             vertexList.Add(pos);
             newVertex.setPosition(vertexList.Last());
@@ -77,17 +78,17 @@ namespace SocialMedia.Graph
             return vertexList.Count;
         }
 
-        public Vertex<E, V> opposite(Vertex<E, V> v, Edge<E, V> e)
+        public AMVertex<E, V> opposite(AMVertex<E, V> v, Edge<E, V> e)
         {
             return e.getEndpoints()[0] == v ? e.getEndpoints()[1] : e.getEndpoints()[0];
         }
 
-        public int outDegreee(Vertex<E, V> v)
+        public int outDegreee(AMVertex<E, V> v)
         {
             return outgoingEdges(v).Count;
         }
 
-        public List<Edge<E, V>> outgoingEdges(Vertex<E, V> v)
+        public List<Edge<E, V>> outgoingEdges(AMVertex<E, V> v)
         {
             var edges = new List<Edge<E, V>>();
             foreach (var e in this.edges())
@@ -102,7 +103,7 @@ namespace SocialMedia.Graph
             edgeList.Remove(e.getPosition());
         }
 
-        public void removeVertex(Vertex<E, V> v)
+        public void removeVertex(AMVertex<E, V> v)
         {
             foreach (var e in this.edges())
             {
@@ -118,9 +119,9 @@ namespace SocialMedia.Graph
             return tempEdgeList;
         }
 
-        public List<Vertex<E, V>> vertices()
+        public List<AMVertex<E, V>> vertices()
         {
-            var tempVertexList = new List<Vertex<E, V>>();
+            var tempVertexList = new List<AMVertex<E, V>>();
             foreach (var ver in vertexList) tempVertexList.Add(ver.getValue());
             return tempVertexList;
         }  

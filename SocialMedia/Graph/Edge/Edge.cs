@@ -1,4 +1,4 @@
-﻿namespace SocialMedia.Graph
+﻿namespace SocialMedia.Graph.Edge
 {
     public class Edge<E, V>
     {
@@ -9,27 +9,27 @@
         public Edge(Vertex<E, V> u, Vertex<E, V> v, E element)
         {
             this.element = element;
-            endpoints = (Vertex<E, V>[])new Vertex<E, V>[] { u, v };
+            endpoints = new Vertex<E, V>[] { u, v };
         }
 
         public E getElement()
         {
-            return this.element;
+            return element;
         }
 
         public Vertex<E, V>[] getEndpoints()
         {
-            return this.endpoints;
+            return endpoints;
         }
 
         public void setPositions(Position<Edge<E, V>> p)
         {
-            this.pos = p;
+            pos = p;
         }
 
         public Position<Edge<E, V>> getPosition()
         {
-            return this.pos;
+            return pos;
         }
     }
 }

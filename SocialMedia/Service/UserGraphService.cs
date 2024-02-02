@@ -23,7 +23,7 @@ public class UserGraphService : IUserGraphService
 
         var graph = new AdjacencyMapGraph<int, User>(false);
 
-        var idToVertexMap = new ConcurrentDictionary<long, Vertex<int, User>>();
+        var idToVertexMap = new ConcurrentDictionary<long, AMVertex<int, User>>();
 
         foreach (var user in userList)
         {
