@@ -15,7 +15,7 @@ public class FindingVerticesWithDistance<E, V> : IFindingVerticesWithDistance<E,
             var nexLevel = new List<Vertex<E, V>>();
             foreach (var ver in level)
             {
-                foreach (var edge in graph.outgoingEdges(v))
+                foreach (var edge in graph.outgoingEdges(ver))
                 {
                     var tempVertex = graph.opposite(ver, edge);
                     if (!known.Contains(tempVertex))

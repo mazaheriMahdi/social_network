@@ -1,5 +1,3 @@
-﻿using System.Data;
-
 namespace SocialMedia.Graph
 {
     public class AdjacencyMapGraph<E, V> : IGraph<E, V>
@@ -82,7 +80,6 @@ namespace SocialMedia.Graph
             {
                 return result;
             }
-
             return null;
         }
 
@@ -129,30 +126,26 @@ namespace SocialMedia.Graph
         {
             return vertexList.Count;
         }
-
+         
         public int findDistance(V a, V b)
         {
             var first = findVertex(a);
             var second = findVertex(b);
             return findVerticesDistance(first, second);
         }
-
-        public int findVerticesDistance(Vertex<E, V> a, Vertex<E, V> b)
+        public int findVerticesDistance(Vertex<E, V> a, Vertex<E,V> b)
         {
             throw new Exception();
         }
-
-        public Vertex<E, V> findVertex(V value)
+        public Vertex<E,V> findVertex(V value)
         {
-            foreach (var ver in vertexList)
+            foreach(var ver in vertexList)
             {
-                if (ver.getValue().getElement().Equals(value))
-                {
+                if (ver.getValue().getElement().Equals(value)){
                     return ver.getValue();
                 }
             }
-
-            throw new InvalidDataException();
+            throw new InvalidDataException(); 
         }
     }
 }
