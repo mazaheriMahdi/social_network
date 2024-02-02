@@ -31,7 +31,7 @@ public class ScoringAlgorithm : IScoringAlgorithm
         score += calculateWorkplaceScore(a, b);
         score += calculateSpecialtiesScore(a, b);
 
-        return score / (degree / 2);
+        return score * 12 / (degree*10 / 2);
     }
 
     private int calculateDateOfBirthScore(User a, User b)

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using AutoMapper;
@@ -16,11 +17,14 @@ public class UserGraphService : IUserGraphService
     private readonly IScoringAlgorithm _scoringAlgorithm;
     private readonly IFindingVerticesWithDistance<int, User> _findingVerticesWithDistance;
     private readonly IMapper mapper;
-    public UserGraphService(IStorageService storageService, IScoringAlgorithm scoringAlgorithm, IFindingVerticesWithDistance<int, User> findingVerticesWithDistance, IMapper mapper)
+
+    public UserGraphService(IStorageService storageService, IScoringAlgorithm scoringAlgorithm,
+        IFindingVerticesWithDistance<int, User> findingVerticesWithDistance, IMapper mapper)
     {
         _storageService = storageService ?? throw new ArgumentNullException(nameof(storageService));
         _scoringAlgorithm = scoringAlgorithm ?? throw new ArgumentNullException(nameof(scoringAlgorithm));
-        _findingVerticesWithDistance = findingVerticesWithDistance ?? throw new ArgumentNullException(nameof(findingVerticesWithDistance));
+        _findingVerticesWithDistance = findingVerticesWithDistance ??
+                                       throw new ArgumentNullException(nameof(findingVerticesWithDistance));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
@@ -49,19 +53,27 @@ public class UserGraphService : IUserGraphService
                 }
 
                 var score = _scoringAlgorithm.Score(vertex.getElement(), targetVertex.getElement(), 1);
-                graph.insertEdge(vertex, targetVertex, score);
+                try
+                {
+                    graph.insertEdge(vertex, targetVertex, score);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             });
         }
 
         _storageService.SaveGraph(graph);
     }
 
-    public ConnectionSuggestionResponseModel GetConnectionSuggestion(long id, long maxDegreeOfConnection, long numberOfSugestion)
+    public ConnectionSuggestionResponseModel GetConnectionSuggestion(long id, long maxDegreeOfConnection,
+        long numberOfSugestion)
     {
         var stopWatch = new Stopwatch();
         stopWatch.Start();
 
-        var priorityQueue = new PriorityQueue<Vertex<int, User>, int>();
+        var priorityQueue = new List<KeyValuePair<Vertex<int, User>, int>>();
 
         var graph = _storageService.GetGraph();
 
@@ -76,28 +88,17 @@ public class UserGraphService : IUserGraphService
             listOfOneLevelVertex.ForEach(vertex =>
             {
                 var score = _scoringAlgorithm.Score(vertex.getElement(), targetVertex.getElement(), degree);
-                priorityQueue.Enqueue(vertex, score);
+                priorityQueue.Add(new KeyValuePair<Vertex<int, User>, int>(vertex, score));
             });
         }
 
-        var result = new List<User>();
-        for (int i = 0; i < numberOfSugestion; i++)
-        {
-            if (priorityQueue.TryDequeue(out var vertex, out var _))
-            {
-                result.Add(vertex.getElement());
-            }
-            else
-            {
-                break;
-            }
-        }
+        var result = priorityQueue.OrderByDescending(x => x.Value).Select(x => x.Key.getElement());
+
         stopWatch.Stop();
         return new ConnectionSuggestionResponseModel
         {
             SuggesttedConnections = mapper.Map<User[], UserDto[]>(result.ToArray()),
             TakenTime = stopWatch.Elapsed
         };
-
     }
 }
