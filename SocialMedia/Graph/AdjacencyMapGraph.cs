@@ -1,6 +1,3 @@
-﻿using System.Data;
-using SocialMedia.Graph.Edge;
-using SocialMedia.Graph.Vertex;
 
 namespace SocialMedia.Graph
 {
