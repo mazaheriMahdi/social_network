@@ -4,7 +4,7 @@ namespace SocialMedia.Service;
 
 public class FindingVerticesWithDistance<E, V> : IFindingVerticesWithDistance<E, V>
 {
-    public List<Vertex<E, V>> FindVertices(AdjacencyMapGraph<E, V> graph, Vertex<E, V> v, int distance)
+    public List<Vertex<E, V>> FindVertices(IGraph<E, V> graph, Vertex<E, V> v, int distance)
     {
         var known = new List<Vertex<E, V>>();
         var level = new List<Vertex<E, V>>();

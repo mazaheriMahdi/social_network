@@ -5,5 +5,5 @@ namespace SocialMedia.Models.ResponseModel;
 public class ConnectionSuggestionResponseModel
 {
     public UserDto[] SuggesttedConnections { get; set; }
-    public long TakenTime { get; set; }
+    public TimeSpan TakenTime { get; set; }
 }

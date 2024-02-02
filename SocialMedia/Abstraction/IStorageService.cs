@@ -9,4 +9,5 @@ public interface IStorageService
     void AddToStorage(AddUserRequestModel addUserRequestModel);
     void SaveGraph(IGraph<int, User> graph);
     User[] GetAllUsers();
+    IGraph<int, User> GetGraph();
 }

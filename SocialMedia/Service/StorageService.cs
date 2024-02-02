@@ -28,6 +28,12 @@ public class StorageService : IStorageService
         _graph = graph;
     }
 
+    public IGraph<int, User> GetGraph()
+    {
+        return _graph;
+    }
+
+
     public User[] GetAllUsers()
     {
         return _users.ToArray();
