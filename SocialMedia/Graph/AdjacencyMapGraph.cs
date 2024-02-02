@@ -1,15 +1,18 @@
+
+using SocialMedia.Graph.Edge;
+using SocialMedia.Graph.Vertex;
 namespace SocialMedia.Graph
 {
-    public class AdjacencyMapGraph<E, V> : IGraph<E, V>
+    public class AdjacencyMapGraph<E, V>
     {
         bool isDeirected;
         private List<Position<Edge<E, V>>> edgeList;
-        private List<Position<Vertex<E, V>>> vertexList;
+        private List<Position<AMVertex<E, V>>> vertexList;
 
         public AdjacencyMapGraph(bool direcred)
         {
             edgeList = new List<Position<Edge<E, V>>>();
-            vertexList = new List<Position<Vertex<E, V>>>();
+            vertexList = new List<Position<AMVertex<E, V>>>();
             isDeirected = direcred;
         }
 
@@ -18,7 +21,7 @@ namespace SocialMedia.Graph
             edgeList.Remove(e.getPosition());
         }
 
-        public void removeVertex(Vertex<E, V> v)
+        public void removeVertex(AMVertex<E, V> v)
         {
             foreach (var e in outgoingEdges(v))
             {
@@ -33,7 +36,7 @@ namespace SocialMedia.Graph
             vertexList.Remove(v.getPosition());
         }
 
-        public Edge<E, V> insertEdge(Vertex<E, V> u, Vertex<E, V> v, E element)
+        public Edge<E, V> insertEdge(AMVertex<E, V> u, AMVertex<E, V> v, E element)
         {
             if (getEdge(u, v) == null)
             {
@@ -51,8 +54,8 @@ namespace SocialMedia.Graph
 
         public Vertex<E, V> insertVertex(V element)
         {
-            Vertex<E, V> newVertex = new Vertex<E, V>(element, isDeirected);
-            Position<Vertex<E, V>> pos = new Position<Vertex<E, V>>(newVertex);
+            AMVertex<E, V> newVertex = new AMVertex<E, V>(element, isDeirected);
+            Position<AMVertex<E, V>> pos = new Position<AMVertex<E, V>>(newVertex);
             vertexList.Add(pos);
             pos.position = vertexList.Last();
             newVertex.setPosition(vertexList.Last());
@@ -61,12 +64,12 @@ namespace SocialMedia.Graph
 
         public Vertex<E, V>[] endVertices(Edge<E, V> e)
         {
-            Vertex<E, V>[] arr = new Vertex<E, V>[2];
+            AMVertex<E, V>[] arr = new AMVertex<E, V>[2];
             foreach (var end in e.getEndpoints()) arr.Append(end);
             return arr;
         }
 
-        public Vertex<E, V> opposite(Vertex<E, V> v, Edge<E, V> e)
+        public Vertex<E, V> opposite(AMVertex<E, V> v, Edge<E, V> e)
         {
             var endpoints = e.getEndpoints();
             if (endpoints[0] == v) return endpoints[1];
@@ -74,26 +77,27 @@ namespace SocialMedia.Graph
             else throw new InvalidDataException();
         }
 
-        public Edge<E, V> getEdge(Vertex<E, V> u, Vertex<E, V> v)
+        public Edge<E, V> getEdge(AMVertex<E, V> u, AMVertex<E, V> v)
         {
             if (!u.getOutgoing().TryGetValue(v, out var result))
             {
                 return result;
             }
+
             return null;
         }
 
-        public int inDegreee(Vertex<E, V> v)
+        public int inDegreee(AMVertex<E, V> v)
         {
             return v.getIncoming().Count;
         }
 
-        public int outDegreee(Vertex<E, V> v)
+        public int outDegreee(AMVertex<E, V> v)
         {
             return v.getOutgoing().Count;
         }
 
-        public List<Edge<E, V>> outgoingEdges(Vertex<E, V> v)
+        public  List<Edge<E, V>> outgoingEdges(AMVertex<E, V> v)
         {
             return new List<Edge<E, V>>(v.getOutgoing().Values);
         }
@@ -117,35 +121,44 @@ namespace SocialMedia.Graph
             return this.edgeList.Count;
         }
 
-        public List<Edge<E, V>> incomingEdges(Vertex<E, V> v)
-        {
-            return new List<Edge<E, V>>(v.getIncoming().Values);
-        }
+        
 
         public int numVertices()
         {
             return vertexList.Count;
         }
-         
+
         public int findDistance(V a, V b)
         {
             var first = findVertex(a);
             var second = findVertex(b);
             return findVerticesDistance(first, second);
         }
-        public int findVerticesDistance(Vertex<E, V> a, Vertex<E,V> b)
+
+        public int findVerticesDistance(Vertex<E, V> a, Vertex<E, V> b)
         {
             throw new Exception();
         }
-        public Vertex<E,V> findVertex(V value)
+
+        public Vertex<E, V> findVertex(V value)
         {
-            foreach(var ver in vertexList)
+            foreach (var ver in vertexList)
             {
-                if (ver.getValue().getElement().Equals(value)){
+                if (ver.getValue().getElement().Equals(value))
+                {
                     return ver.getValue();
                 }
             }
-            throw new InvalidDataException(); 
+
+            throw new InvalidDataException();
         }
+
+        public  List<Edge<E, V>> incomingEdges(AMVertex<E, V> v)
+        {
+            return new List<Edge<E, V>>(v.getIncoming().Values);
+
+        }
+
+        
     }
 }

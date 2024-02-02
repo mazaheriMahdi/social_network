@@ -1,35 +1,37 @@
-﻿namespace SocialMedia.Graph
+﻿using SocialMedia.Graph.Vertex;
+
+namespace SocialMedia.Graph.Edge
 {
     public class Edge<E, V>
     {
         private E element;
         private Position<Edge<E, V>> pos;
-        private Vertex<E, V>[] endpoints;
+        private AMVertex<E, V>[] endpoints;
 
-        public Edge(Vertex<E, V> u, Vertex<E, V> v, E element)
+        public Edge(AMVertex<E, V> u, AMVertex<E, V> v, E element)
         {
             this.element = element;
-            endpoints = (Vertex<E, V>[])new Vertex<E, V>[] { u, v };
+            endpoints = new AMVertex<E, V>[] { u, v };
         }
 
         public E getElement()
         {
-            return this.element;
+            return element;
         }
 
-        public Vertex<E, V>[] getEndpoints()
+        public AMVertex<E, V>[] getEndpoints()
         {
-            return this.endpoints;
+            return endpoints;
         }
 
         public void setPositions(Position<Edge<E, V>> p)
         {
-            this.pos = p;
+            pos = p;
         }
 
         public Position<Edge<E, V>> getPosition()
         {
-            return this.pos;
+            return pos;
         }
     }
 }
