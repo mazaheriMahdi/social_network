@@ -77,14 +77,15 @@ namespace SocialMedia.Graph
             else throw new InvalidDataException();
         }
 
-        public ALVertex<E, V> getEdge(ALVertex<E, V> u, ALVertex<E, V> v)
+        public ALEdge<E, V> getEdge(ALVertex<E, V> u, ALVertex<E, V> v)
         {
-            if (!u.getOutgoing().TryGetValue(v, out var result))
+            var outGo = u.getOutgoing();
+            foreach(var o in outGo)
             {
-                return result;
+                if (o.getEndpoints().Contains(v)) return o;
             }
-
             return null;
+
         }
 
         public int inDegreee(ALVertex<E, V> v)

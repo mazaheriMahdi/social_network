@@ -42,6 +42,7 @@ namespace SocialMedia.Graph.Vertex
         public List<ALEdge<E, V>> getOutgoing()
         {
             return outgoing;
+
         }
 
         public List<ALEdge<E, V>> getIncoming()

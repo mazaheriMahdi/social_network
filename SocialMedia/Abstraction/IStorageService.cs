@@ -7,6 +7,6 @@ namespace SocialMedia.Abstraction;
 public interface IStorageService
 {
     void AddToStorage(AddUserRequestModel addUserRequestModel);
-    void SaveGraph(IGraph<int, User> graph);
+    void SaveGraph(AdjacencyMapGraph<int, User> graph);
     User[] GetAllUsers();
 }

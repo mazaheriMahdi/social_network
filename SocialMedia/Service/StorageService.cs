@@ -10,7 +10,7 @@ public class StorageService : IStorageService
 {
     private readonly IMapper _mapper;
     private readonly List<User> _users;
-    private IGraph<int, User> _graph;
+    private AdjacencyMapGraph<int, User> _graph;
 
     public StorageService(IMapper mapper)
     {
@@ -23,7 +23,7 @@ public class StorageService : IStorageService
         _users.AddRange(_mapper.Map<UserDto[], User[]>(addUserRequestModel.Users));
     }
 
-    public void SaveGraph(IGraph<int, User> graph)
+    public void SaveGraph(AdjacencyMapGraph<int, User> graph)
     {
         _graph = graph;
     }

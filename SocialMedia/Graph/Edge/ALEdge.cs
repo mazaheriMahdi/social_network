@@ -5,7 +5,7 @@ namespace SocialMedia.Graph.Edge
     public class ALEdge<E,V>
     {
         private E element;
-        private Position<Edge<E, V>> pos;
+        private Position<ALEdge<E, V>> pos;
         private ALVertex<E, V>[] endpoints;
 
         public ALEdge(ALVertex<E, V> u, ALVertex<E, V> v, E element)
@@ -24,12 +24,12 @@ namespace SocialMedia.Graph.Edge
             return endpoints;
         }
 
-        public void setPositions(Position<Edge<E, V>> p)
+        public void setPositions(Position<ALEdge<E, V>> p)
         {
             pos = p;
         }
 
-        public Position<Edge<E, V>> getPosition()
+        public Position<ALEdge<E, V>> getPosition()
         {
             return pos;
         }

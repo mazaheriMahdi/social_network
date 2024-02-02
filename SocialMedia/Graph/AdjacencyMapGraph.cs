@@ -52,7 +52,7 @@ namespace SocialMedia.Graph
             throw new ArgumentException();
         }
 
-        public Vertex<E, V> insertVertex(V element)
+        public AMVertex<E, V> insertVertex(V element)
         {
             AMVertex<E, V> newVertex = new AMVertex<E, V>(element, isDeirected);
             Position<AMVertex<E, V>> pos = new Position<AMVertex<E, V>>(newVertex);
@@ -69,7 +69,7 @@ namespace SocialMedia.Graph
             return arr;
         }
 
-        public Vertex<E, V> opposite(AMVertex<E, V> v, Edge<E, V> e)
+        public AMVertex<E, V> opposite(AMVertex<E, V> v, Edge<E, V> e)
         {
             var endpoints = e.getEndpoints();
             if (endpoints[0] == v) return endpoints[1];
@@ -109,9 +109,9 @@ namespace SocialMedia.Graph
             return tempEdgeList;
         }
 
-        public List<Vertex<E, V>> vertices()
+        public List<AMVertex<E, V>> vertices()
         {
-            var tempVertexList = new List<Vertex<E, V>>();
+            var tempVertexList = new List<AMVertex<E, V>>();
             foreach (var ver in vertexList) tempVertexList.Add(ver.getValue());
             return tempVertexList;
         }
