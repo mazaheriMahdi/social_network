@@ -1,6 +1,9 @@
+using SocialMedia.Models.ResponseModel;
+
 namespace SocialMedia.Abstraction;
 
 public interface IUserGraphService
 {
-    public void GenerateGraph();
+    void GenerateGraph();
+    ConnectionSuggestionResponseModel GetConnectionSuggestion(long id, long maxDegreeOfConnection, long numberOfSugestion);
 }

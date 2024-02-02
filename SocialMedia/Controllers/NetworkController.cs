@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialMedia.Abstraction;
 using SocialMedia.Models.BusinessModels;
 using SocialMedia.Models.RequestModel;
+using SocialMedia.Models.ResponseModel;
 
 namespace SocialMedia.Controllers;
 
@@ -10,10 +11,12 @@ namespace SocialMedia.Controllers;
 public class NetworkController : ControllerBase
 {
     private readonly IStorageService _storageService;
+    private readonly IUserGraphService _userGraphService;
 
-    public NetworkController(IStorageService storageService)
+    public NetworkController(IStorageService storageService, IUserGraphService userGraphService)
     {
         _storageService = storageService ?? throw new ArgumentNullException(nameof(storageService));
+        _userGraphService = userGraphService ?? throw new ArgumentNullException(nameof(userGraphService));
     }
 
     [HttpPost]
@@ -27,5 +30,18 @@ public class NetworkController : ControllerBase
     public ActionResult<User[]> GetUsers()
     {
         return _storageService.GetAllUsers();
+    }
+
+    [HttpGet]
+    public ActionResult GenerateGraph()
+    {
+        _userGraphService.GenerateGraph();
+        return Ok("graph generated");
+    }
+
+    [HttpPost("getSuggestion")]
+    public ActionResult<ConnectionSuggestionResponseModel> GetSuggestion([FromBody] GetSuggestionRequestModel getSuggestionRequestModel)
+    {
+        return _userGraphService.GetConnectionSuggestion(getSuggestionRequestModel.id, getSuggestionRequestModel.maxDegreeOfConnection, getSuggestionRequestModel.numberOfSugestion);
     }
 }

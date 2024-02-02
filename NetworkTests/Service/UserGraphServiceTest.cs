@@ -17,7 +17,7 @@ public class UserGraphServiceTest
     {
         _storageService = Substitute.For<IStorageService>();
         _scoringAlgorithm = Substitute.For<IScoringAlgorithm>();
-        this.sut = new UserGraphService(_storageService, _scoringAlgorithm);
+        // this.sut = new UserGraphService(_storageService, _scoringAlgorithm);
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public class UserGraphServiceTest
             }
         };
         _storageService.GetAllUsers().Returns(userList);
-        _scoringAlgorithm.Score(Arg.Any<User>(), Arg.Any<User>()).Returns(1);
+        _scoringAlgorithm.Score(Arg.Any<User>(), Arg.Any<User>(), Arg.Any<int>()).Returns(1);
 
         var expected = new AdjacencyMapGraph<int, User>(false);
         var vertex1 = expected.insertVertex(userList[0]);
@@ -56,6 +56,6 @@ public class UserGraphServiceTest
         sut.GenerateGraph();
 
         // Assert
-        _storageService.Received().SaveGraph(Arg.Any<IGraph<int,User>>());
+        _storageService.Received().SaveGraph(Arg.Any<IGraph<int, User>>());
     }
 }
