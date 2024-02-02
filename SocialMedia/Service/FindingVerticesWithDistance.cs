@@ -1,4 +1,5 @@
 ﻿using SocialMedia.Graph;
+using SocialMedia.Graph.Vertex;
 
 namespace SocialMedia.Service;
 

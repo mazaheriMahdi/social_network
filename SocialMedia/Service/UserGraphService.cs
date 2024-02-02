@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using SocialMedia.Abstraction;
 using SocialMedia.Exceptions;
 using SocialMedia.Graph;
+using SocialMedia.Graph.Vertex;
 using SocialMedia.Models.BusinessModels;
 
 namespace SocialMedia.Service;
