@@ -32,14 +32,15 @@ public class NetworkController : ControllerBase
         return _storageService.GetAllUsers();
     }
 
+    [Route("/generateGraph")]
     [HttpGet]
     public ActionResult GenerateGraph()
     {
         _userGraphService.GenerateGraph();
         return Ok("graph generated");
     }
-
-    [HttpPost("getSuggestion")]
+    [Route("/getSuggestion")]
+    [HttpPost]
     public ActionResult<ConnectionSuggestionResponseModel> GetSuggestion([FromBody] GetSuggestionRequestModel getSuggestionRequestModel)
     {
         return _userGraphService.GetConnectionSuggestion(getSuggestionRequestModel.id, getSuggestionRequestModel.maxDegreeOfConnection, getSuggestionRequestModel.numberOfSugestion);

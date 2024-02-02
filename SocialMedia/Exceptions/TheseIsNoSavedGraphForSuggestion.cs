@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace SocialMedia.Service
+namespace SocialMedia.Exceptions
 {
     [Serializable]
     internal class TheseIsNoSavedGraphForSuggestion : Exception
